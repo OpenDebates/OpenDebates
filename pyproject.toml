@@ -1,0 +1,37 @@
+[tool.towncrier]
+package = "OpenDebates"
+package_dir = "OpenDebates"
+directory = "changes"
+filename = "CHANGELOG.rst"
+issue_format = "`#{issue} <https://github.com/OpenDebates/OpenDebates/issues/{issue}>`_"
+type = [
+    { name = "Breaking Changes",            directory = "breaking",     showcontent = true },
+    { name = "Deprecation",                 directory = "deprecation",  showcontent = true },
+    { name = "Features",                    directory = "feature",      showcontent = true },
+    { name = "Bugfixes",                    directory = "bugfix",       showcontent = true },
+    { name = "Documentation Improvements",  directory = "doc",          showcontent = true },
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra --strict-markers --ignore=docs/conf.py --ignore=setup.py --ignore=benchmark --ignore=ci --ignore=.eggs --doctest-modules --doctest-glob=/*.rst --tb=short"
+norecursedirs = [
+	".git",
+	".tox",
+	".env",
+	"dist",
+	"build",
+	"migrations"
+]
+testpaths = [
+    "tests"
+]
+python_files = [
+	"test_*.py",
+	"*_test.py",
+	"tests.py"
+]
+
+[build-system]
+requires = ["wheel", "setuptools"]
+build-backend = "setuptools.build_meta"

@@ -32,6 +32,77 @@ python_files = [
 	"tests.py"
 ]
 
+[tool.poetry]
+name = "opendebates"
+version = "0.1.0"
+description = "Open Source Semantic Wiki and Debating Platform"
+authors = ["Taven <taven@opendebates.net>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/OpenDebates/OpenDebates"
+repository = "https://github.com/OpenDebates/OpenDebates"
+documentation = "https://opendebates.readthedocs.io"
+keywords = [
+	"debate",
+	"wiki",
+	"semantic",
+	"linguistics"
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Framework :: FastAPI",
+	"Intended Audience :: End Users/Desktop",
+	"License :: OSI Approved :: Apache Software License",
+	"Natural Language :: English",
+	"Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+]
+packages = [
+    { include = "OpenDebates" }
+]
+include = [
+    ".bumpversion.cfg",
+    ".coveragerc",
+    ".editorconfig",
+    ".readthedocs.yml",
+    "AUTHORS.rst",
+    "tests/*",
+    "poetry.lock"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+fastapi = "^0.87.0"
+sqlmodel = "^0.0.8"
+toml = "^0.10.2"
+schema = "^0.7.5"
+uvicorn = "^0.19.0"
+aiofiles = "^22.1.0"
+colorama = "^0.4.6"
+structlog-sentry-logger = "^0.17.5"
+structlog = "^22.2.0"
+
+[tool.poetry.scripts]
+od = 'OpenDebates.__main__:main'
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^5.3.0"
+furo = "^2022.9.29"
+pygments = "^2.13.0"
+
+[tool.poetry.group.tests.dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+
+[tool.poetry.group.release.dependencies]
+isort = "^5.10.1"
+twine = "^4.0.1"
+codecov = "^2.1.12"
+bump2version = "^1.0.1"
+black = "^22.10.0"
+towncrier = "^22.8.0"
+build = "^0.9.0"
+
 [build-system]
-requires = ["wheel", "setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

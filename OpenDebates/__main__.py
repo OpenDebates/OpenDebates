@@ -49,7 +49,6 @@ def main():
         "OpenDebates.app:app",
         host="127.0.0.1",
         port=5000,
-        debug=config["api"]["debug"],
         log_config=UVICORN_LOGGING_CONFIG,
         log_level=config["api"]["log_level"].lower(),
     )

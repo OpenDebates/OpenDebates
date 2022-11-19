@@ -1,2 +1,2 @@
 # OpenDebates
-Open Source Semantically Validated Debating Platform
+Open Source Semantic Wiki and Debating Platform

@@ -5,7 +5,7 @@ from schema import Or, Schema
 
 config_schema = Schema(
     {
-        "api": {"production": Or(True, False)},
+        "api": {"production": Or(True, False), "secret": str},
         "logs": {
             "level": Or(
                 "DEBUG",

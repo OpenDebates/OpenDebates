@@ -1,6 +1,7 @@
 import logging
 
 import sentry_sdk
+from beanie import init_beanie
 from fastapi import FastAPI
 from sentry_sdk.integrations.logging import (
     LoggingIntegration,
@@ -10,7 +11,10 @@ from sentry_sdk.integrations.logging import (
 
 import OpenDebates
 from OpenDebates.config import config
+from OpenDebates.db import User, db
 from OpenDebates.logger import logger
+from OpenDebates.schemas import UserRead, UserCreate, UserUpdate
+from OpenDebates.users import fastapi_users, auth_backend
 
 # Logging Config
 environment = "production" if config["api"]["production"] else "development"
@@ -57,4 +61,39 @@ else:
 # Create App Instance
 logger.info(f"Starting OpenDebates: {OpenDebates.__version__}")
 app = FastAPI(title="Open Debates", version=OpenDebates.__version__)
-database_uri = config["database"]["uri"]
+
+
+# Routers
+app.include_router(
+    fastapi_users.get_auth_router(auth_backend), prefix="/auth/jwt", tags=["auth"]
+)
+app.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["Authentication"],
+)
+app.include_router(
+    fastapi_users.get_reset_password_router(),
+    prefix="/auth",
+    tags=["Authentication"],
+)
+app.include_router(
+    fastapi_users.get_verify_router(UserRead),
+    prefix="/auth",
+    tags=["Authentication"],
+)
+app.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate),
+    prefix="/users",
+    tags=["Users"],
+)
+
+
+@app.on_event("startup")
+async def on_startup():
+    await init_beanie(
+        database=db,
+        document_models=[
+            User,
+        ],
+    )

@@ -1,7 +1,5 @@
 import asyncio
 
-import sentry_sdk
-import structlog_sentry_logger
 import uvicorn
 
 from OpenDebates.config import config, config_schema
@@ -40,9 +38,6 @@ UVICORN_LOGGING_CONFIG = {
     },
 }
 
-sentry_sdk.init(config["api"]["sentry"], traces_sample_rate=1.0)
-logger = structlog_sentry_logger.get_logger()
-
 
 def main():
     uvicorn.run(
@@ -50,7 +45,7 @@ def main():
         host="127.0.0.1",
         port=5000,
         log_config=UVICORN_LOGGING_CONFIG,
-        log_level=config["api"]["log_level"].lower(),
+        log_level=config["logs"]["level"].lower(),
     )
 
 

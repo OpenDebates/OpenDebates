@@ -5,8 +5,9 @@ from schema import Or, Schema
 
 config_schema = Schema(
     {
-        "api": {
-            "log_level": Or(
+        "api": {"production": Or(True, False)},
+        "logs": {
+            "level": Or(
                 "DEBUG",
                 "INFO",
                 "WARNING",
@@ -14,7 +15,8 @@ config_schema = Schema(
                 "CRITICAL",
             ),
             "sentry": str,
-        }
+        },
+        "database": {"uri": str},
     }
 )
 

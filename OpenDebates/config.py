@@ -16,7 +16,13 @@ config_schema = Schema(
             ),
             "sentry": str,
         },
-        "database": {"uri": str},
+        "database": {
+            "name": str,
+            "user": str,
+            "password": str,
+            "host": str,
+            "port": str,
+        },
     }
 )
 

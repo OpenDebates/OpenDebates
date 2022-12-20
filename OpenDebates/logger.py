@@ -1,7 +1,13 @@
 import logging
 import sys
 
+import sentry_sdk
 from loguru import logger
+from sentry_sdk.integrations.logging import (
+    LoggingIntegration,
+    BreadcrumbHandler,
+    EventHandler,
+)
 
 from OpenDebates.config import config
 
@@ -25,18 +31,3 @@ class InterceptHandler(logging.Handler):
         logger.opt(depth=depth, exception=record.exc_info).log(
             level, record.getMessage()
         )
-
-
-def setup_logging():
-    logging.captureWarnings(True)
-    logging.root.handlers = [InterceptHandler()]
-    logging.root.setLevel(0)
-
-    for name in logging.root.manager.loggerDict.keys():
-        logging.getLogger(name).handlers = []
-        logging.getLogger(name).propagate = True
-
-    logger.configure(handlers=[{"sink": sys.stdout, "level": logging.INFO}])
-
-
-setup_logging()

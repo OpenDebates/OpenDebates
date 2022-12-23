@@ -133,3 +133,5 @@ config.toml
 
 # Logs
 .logs/
+assets/distribution/
+static/

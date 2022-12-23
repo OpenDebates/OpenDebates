@@ -82,6 +82,8 @@ timeflake = "^0.4.2"
 sendgrid = "^6.9.7"
 django = "^4.1.4"
 psycopg2 = "^2.9.5"
+django-webpack-loader = "^1.8.0"
+django-vite = "^2.0.2"
 
 
 [tool.poetry.group.tests.dependencies]

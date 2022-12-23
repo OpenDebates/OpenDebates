@@ -1,3 +1,3 @@
 # Open Debates
 
-Open Source Semantic Wiki and Debating Platform
+Open Source Semantic Wiki and Debate Platform

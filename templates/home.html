@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+{% load django_vite %}
+{% load static %}
+{% block content %}
+<div class="bg-cover bg-scroll" style="background-image: url('{% vite_asset_url 'img/hero.jpg' %}')">
+    <div class="hero min-h-screen">
+        <div class="hero-content text-center text-secondary-content">
+            <div class="max-w-md">
+                <img src="{% vite_asset_url 'img/OpenDebatesDark.svg' %}" class="mx-auto mb-5 w-48" data-tilt data-tilt-glare data-tilt-max-glare="0.8" data-tilt-scale="1.1">
+                <h1 class="mb-5 text-2xl font-bold">Open Debates</h1>
+                <p class="mb-5">A wiki with an inference engine.</p>
+                <a href="#info-section" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-overlay">
+            <div class="m-4 sticky top-4">
+            {% include 'components/navigation.html' %}
+            </div>
+        </div>
+    </div>
+    <div id="info-section" class="hero-overlay flex justify-center">
+        <article class="prose">
+            <div class="flex justify-center text-secondary-content">
+                <p></p>
+            </div>
+        </article>
+    </div>
+    {% include 'components/footer.html' %}
+</div>
+{% endblock content %}

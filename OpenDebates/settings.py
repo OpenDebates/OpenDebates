@@ -35,9 +35,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-g5z&8k*-e!ir0651f_m(#crvbu8$agxk_0c^gkkf5xr^@p3a$4"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not config["api"]["production"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config["api"]["allowed_hosts"]
 
 # Application definition
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_vite",
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,7 @@ ROOT_URLCONF = "OpenDebates.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [(BASE_DIR / "theme/templates")],
+        "DIRS": [(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "theme/static/")]
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -205,3 +206,13 @@ else:
         filter="OpenDebates",
         level=logging.INFO,
     )
+
+# Vite Config
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "assets" / "distribution"
+DJANGO_VITE_DEV_MODE = DEBUG
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
+DJANGO_VITE_DEV_SERVER_PORT = 3000
+DJANGO_VITE_STATIC_URL_PREFIX = ""
+DJANGO_VITE_MANIFEST_PATH = os.path.join(
+    BASE_DIR, DJANGO_VITE_ASSETS_PATH, "manifest.json"
+)

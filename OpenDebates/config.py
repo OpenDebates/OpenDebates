@@ -6,7 +6,11 @@ from schema import Or, Schema
 
 config_schema = Schema(
     {
-        "api": {"production": Or(True, False), "secret": str, "allowed_hosts": List[str]},
+        "api": {
+            "production": Or(True, False),
+            "secret": str,
+            "allowed_hosts": List[str],
+        },
         "logs": {
             "level": Or(
                 "DEBUG",

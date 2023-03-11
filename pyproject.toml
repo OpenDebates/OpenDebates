@@ -76,13 +76,12 @@ include = [
 python = ">=3.11,<3.12"
 toml = "^0.10.2"
 schema = "^0.7.5"
-sentry-sdk = "^1.12.1"
+sentry-sdk = "^1.16.0"
 loguru = "^0.6.0"
 timeflake = "^0.4.2"
 sendgrid = "^6.9.7"
-django = "^4.1.4"
+django = "^4.1.7"
 psycopg2 = "^2.9.5"
-django-webpack-loader = "^1.8.0"
 django-vite = "^2.0.2"
 
 
@@ -95,7 +94,7 @@ isort = "^5.10.1"
 twine = "^4.0.1"
 codecov = "^2.1.12"
 bump2version = "^1.0.1"
-black = { extras = ["d"], version = "^22.12.0" }
+black = { extras = ["d"], version = "^23.1.0" }
 towncrier = "^22.8.0"
 build = "^0.9.0"
 
